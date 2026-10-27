@@ -1,0 +1,23 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "EthicalAuditFlow",
+    "kind": "package",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "projectKey": "d68f104e-800b-4d0b-a5e5-2fac160fb56e",
+    "isOverridable": true,
+    "dependencies": [],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "name": "EthicalAuditFlow"
+    },
+    "locks": [],
+    "key": "d4393f66-8094-4a96-92b0-729a44fd5c07"
+  }
+}

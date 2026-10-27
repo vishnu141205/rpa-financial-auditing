@@ -1,0 +1,17 @@
+{
+  "DocVersion": "1.0.0",
+  "StudioMinVersion": "2025.10.0",
+  "SolutionId": "a211df2c-13a7-4bbc-6141-08df2454f722",
+  "Projects": [
+    {
+      "Type": "Process",
+      "ProjectRelativePath": "EthicalAuditFinalize/project.uiproj",
+      "Id": "8ed40375-2494-4e36-95a1-e6209b2453c8"
+    },
+    {
+      "Type": "Process",
+      "ProjectRelativePath": "EthicalAuditFlow/project.uiproj",
+      "Id": "d68f104e-800b-4d0b-a5e5-2fac160fb56e"
+    }
+  ]
+}

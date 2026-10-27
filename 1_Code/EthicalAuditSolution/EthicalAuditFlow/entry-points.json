@@ -1,0 +1,93 @@
+{
+  "$schema": "https://cloud.uipath.com/draft/2024-12/entry-point",
+  "entryPoints": [
+    {
+      "filePath": "Main.xaml",
+      "uniqueId": "71d96e46-b3f4-4534-b534-82bb21b9740a",
+      "type": "process",
+      "input": {
+        "type": "object",
+        "properties": {
+          "in_DataFolder": {
+            "type": "string"
+          },
+          "in_Mode": {
+            "type": "string"
+          },
+          "in_ReviewGrouping": {
+            "type": "string"
+          },
+          "in_ExtractionMode": {
+            "type": "string"
+          }
+        },
+        "required": []
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "out_Summary": {
+            "type": "string"
+          },
+          "out_Committed": {
+            "type": "integer",
+            "minimum": -2147483648,
+            "maximum": 2147483647
+          },
+          "out_Routed": {
+            "type": "integer",
+            "minimum": -2147483648,
+            "maximum": 2147483647
+          },
+          "out_FalseCommits": {
+            "type": "integer",
+            "minimum": -2147483648,
+            "maximum": 2147483647
+          },
+          "out_LeakHits": {
+            "type": "integer",
+            "minimum": -2147483648,
+            "maximum": 2147483647
+          },
+          "out_ChainOk": {
+            "type": "boolean"
+          },
+          "out_AccuracyPct": {
+            "type": "number",
+            "minimum": -1.7976931348623157E+308,
+            "maximum": 1.7976931348623157E+308
+          },
+          "out_Conclusion": {
+            "type": "string"
+          },
+          "out_PapersStored": {
+            "type": "boolean"
+          },
+          "out_RunFolder": {
+            "type": "string"
+          },
+          "out_TasksCreated": {
+            "type": "integer",
+            "minimum": -2147483648,
+            "maximum": 2147483647
+          },
+          "out_PdfExtracted": {
+            "type": "integer",
+            "minimum": -2147483648,
+            "maximum": 2147483647
+          },
+          "out_PdfUnreadable": {
+            "type": "integer",
+            "minimum": -2147483648,
+            "maximum": 2147483647
+          },
+          "out_ExtractionAccuracyPct": {
+            "type": "number",
+            "minimum": -1.7976931348623157E+308,
+            "maximum": 1.7976931348623157E+308
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "name": "EthicalAuditFinalize",
+  "projectId": "6b0058b9-f13f-4adb-bc12-5ec2183638a5",
+  "description": "Finalize the review: read Action Center outcomes, sign off the findings register",
+  "main": "Main.xaml",
+  "dependencies": {
+    "UiPath.System.Activities": "[26.8.2]",
+    "UiPath.Excel.Activities": "3.6.1",
+    "UiPath.Persistence.Activities": "1.13.0"
+  },
+  "webServices": [],
+  "entitiesStores": [],
+  "schemaVersion": "4.1",
+  "studioVersion": "26.0.203.0",
+  "projectVersion": "1.0.0",
+  "runtimeOptions": {
+    "autoDispose": false,
+    "netFrameworkLazyLoading": false,
+    "isPausable": false,
+    "isAttended": false,
+    "requiresUserInteraction": false,
+    "supportsPersistence": false,
+    "workflowSerialization": "NewtonsoftJson",
+    "excludedLoggedData": [
+      "Private:*",
+      "*password*"
+    ],
+    "executionType": "Workflow",
+    "readyForPiP": false,
+    "startsInPiP": false,
+    "mustRestoreAllDependencies": true,
+    "pipType": "ChildSession"
+  },
+  "designOptions": {
+    "projectProfile": "Developement",
+    "outputType": "Process",
+    "libraryOptions": {
+      "privateWorkflows": []
+    },
+    "processOptions": {
+      "ignoredFiles": []
+    },
+    "fileInfoCollection": [],
+    "saveToCloud": false
+  },
+  "expressionLanguage": "VisualBasic",
+  "entryPoints": [
+    {
+      "filePath": "Main.xaml",
+      "uniqueId": "cf8774aa-300a-4fbd-8608-73cbe57c9798",
+      "input": [
+        {
+          "name": "in_RunFolder",
+          "type": "System.String",
+          "required": true
+        }
+      ],
+      "output": [
+        {
+          "name": "out_Reviewed",
+          "type": "System.Int32"
+        },
+        {
+          "name": "out_Pending",
+          "type": "System.Int32"
+        },
+        {
+          "name": "out_Summary",
+          "type": "System.String"
+        }
+      ]
+    }
+  ],
+  "isTemplate": false,
+  "templateProjectData": {},
+  "publishData": {},
+  "targetFramework": "Portable"
+}

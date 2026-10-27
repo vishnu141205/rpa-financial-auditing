@@ -1,0 +1,199 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ucas="clr-namespace:UiPath.Core.Activities.Storage;assembly=UiPath.System.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:upamt="clr-namespace:UiPath.Persistence.Activities.Model.Task;assembly=UiPath.Persistence.Activities" xmlns:upat="clr-namespace:UiPath.Persistence.Activities.Tasks;assembly=UiPath.Persistence.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_RunFolder" Type="InArgument(x:String)" />
+    <x:Property Name="out_Reviewed" Type="OutArgument(x:Int32)" />
+    <x:Property Name="out_Pending" Type="OutArgument(x:Int32)" />
+    <x:Property Name="out_Rejected" Type="OutArgument(x:Int32)" />
+    <x:Property Name="out_Summary" Type="OutArgument(x:String)" />
+    <x:Property Name="out_AfterReview" Type="OutArgument(x:String)" />
+    <x:Property Name="out_Completion" Type="OutArgument(x:String)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Text.RegularExpressions</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>UiPath.Persistence.Activities.ExternalTask</x:String>
+      <x:String>UiPath.Persistence.Activities.FormTask</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Text.RegularExpressions</AssemblyReference>
+      <AssemblyReference>System.Security.Cryptography</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Persistence.Activities</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Finalize review - read Action Center outcomes and sign off the findings" sap2010:WorkflowViewState.IdRef="Sequence_6">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="runFolder" />
+      <Variable x:TypeArguments="x:String" Name="tmpDir" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtFindings" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtTasks" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtOutcomes" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtPlan" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtReportBefore" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtAfter" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtChain" />
+      <Variable x:TypeArguments="x:Boolean" Name="chainVerified" />
+      <Variable x:TypeArguments="x:String" Name="orgHash" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <If Condition="[String.IsNullOrWhiteSpace(in_RunFolder)]" DisplayName="Check the run folder was supplied" sap2010:WorkflowViewState.IdRef="If_1">
+      <If.Then>
+        <Sequence DisplayName="Then" sap2010:WorkflowViewState.IdRef="Sequence_1">
+          <Throw DisplayName="Run folder is required" Exception="[New ArgumentException(&quot;in_RunFolder is required, for example 20261010-083217_Ethical&quot;)]" sap2010:WorkflowViewState.IdRef="Throw_1" />
+        </Sequence>
+      </If.Then>
+    </If>
+    <Assign x:TypeArguments="x:String" DisplayName="Run folder without stray spaces" sap2010:WorkflowViewState.IdRef="Assign`1_1" To="[runFolder]" Value="[in_RunFolder.Trim()]" />
+    <Assign x:TypeArguments="x:String" DisplayName="Working folder" sap2010:WorkflowViewState.IdRef="Assign`1_2" To="[tmpDir]" Value="[System.IO.Path.Combine(System.IO.Path.GetTempPath(), &quot;EthicalAuditFinalize&quot;, runFolder)]" />
+    <ui:CreateDirectory ContinueOnError="{x:Null}" Output="{x:Null}" DisplayName="Create working folder" sap2010:WorkflowViewState.IdRef="CreateDirectory_1" Path="[tmpDir]" />
+    <Assign x:TypeArguments="x:Int32" DisplayName="Set out_Reviewed" sap2010:WorkflowViewState.IdRef="Assign`1_3" To="[out_Reviewed]" Value="[0]" />
+    <Assign x:TypeArguments="x:Int32" DisplayName="Set out_Pending" sap2010:WorkflowViewState.IdRef="Assign`1_4" To="[out_Pending]" Value="[0]" />
+    <Assign x:TypeArguments="x:Int32" DisplayName="Set out_Rejected" sap2010:WorkflowViewState.IdRef="Assign`1_5" To="[out_Rejected]" Value="[0]" />
+    <ucas:DownloadStorageFile TimeoutMS="{x:Null}" Destination="[tmpDir &amp; &quot;/3_findings_register.csv&quot;]" DisplayName="Download the findings register from the bucket" sap2010:WorkflowViewState.IdRef="DownloadStorageFile_1" Path="[runFolder &amp; &quot;/3_findings_register.csv&quot;]" StorageBucketName="EthicalAudit-WorkingPapers" />
+    <ucas:DownloadStorageFile TimeoutMS="{x:Null}" Destination="[tmpDir &amp; &quot;/6_review_tasks.csv&quot;]" DisplayName="Download the review-form list from the bucket" sap2010:WorkflowViewState.IdRef="DownloadStorageFile_2" Path="[runFolder &amp; &quot;/6_review_tasks.csv&quot;]" StorageBucketName="EthicalAudit-WorkingPapers" />
+    <ui:ReadCsvFile PathResource="{x:Null}" DataTable="[dtFindings]" Delimitator="Comma" DelimitatorForViewModel="Comma" DisplayName="Read findings register" FilePath="[tmpDir &amp; &quot;/3_findings_register.csv&quot;]" sap2010:WorkflowViewState.IdRef="ReadCsvFile_1" />
+    <ui:ReadCsvFile PathResource="{x:Null}" DataTable="[dtTasks]" Delimitator="Comma" DelimitatorForViewModel="Comma" DisplayName="Read review forms" FilePath="[tmpDir &amp; &quot;/6_review_tasks.csv&quot;]" sap2010:WorkflowViewState.IdRef="ReadCsvFile_2" />
+    <ui:GenerateDataTable ColumnSeparators="{x:Null}" ColumnSizes="{x:Null}" NewLineSeparator="{x:Null}" Positions="{x:Null}" AutoDetectTypes="False" CSVParsing="True" DataTable="[dtOutcomes]" DisplayName="Create outcomes table" sap2010:WorkflowViewState.IdRef="GenerateDataTable_1" Input="[&quot;CompanyId,Outcome,TaskId,Status,Action,Reviewer,CompletedAt,Comment&quot;]" UseColumnHeader="True" />
+    <ui:ForEach x:TypeArguments="sd:DataRow" CurrentIndex="{x:Null}" DisplayName="For each review form" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[dtTasks.Rows]">
+      <ui:ForEach.Body>
+        <ActivityAction x:TypeArguments="sd:DataRow">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="sd:DataRow" Name="trow" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Body" sap2010:WorkflowViewState.IdRef="Sequence_5">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="x:String" Name="coId" />
+              <Variable x:TypeArguments="x:String" Name="oc" />
+              <Variable x:TypeArguments="x:String" Name="flt" />
+              <Variable x:TypeArguments="x:String" Name="comment" />
+              <Variable x:TypeArguments="x:Int64" Name="taskId" />
+              <Variable x:TypeArguments="upamt:TaskData" Name="taskInfo" />
+              <Variable x:TypeArguments="x:String" Name="status" />
+              <Variable x:TypeArguments="x:String" Name="action" />
+              <Variable x:TypeArguments="x:String" Name="completedAt" />
+              <Variable x:TypeArguments="x:String" Name="reviewer" />
+            </Sequence.Variables>
+            <Assign x:TypeArguments="x:String" DisplayName="Company (ALL = whole organization)" sap2010:WorkflowViewState.IdRef="Assign`1_6" To="[coId]" Value="[trow(&quot;CompanyId&quot;).ToString]" />
+            <Assign x:TypeArguments="x:String" DisplayName="Problem type (MIXED = all types)" sap2010:WorkflowViewState.IdRef="Assign`1_7" To="[oc]" Value="[trow(&quot;Outcome&quot;).ToString]" />
+            <Assign x:TypeArguments="x:String" DisplayName="Which findings this form covers" sap2010:WorkflowViewState.IdRef="Assign`1_8" To="[flt]" Value="[&quot;1 = 1&quot; &amp; If(coId = &quot;ALL&quot;, &quot;&quot;, &quot; AND CompanyId = '&quot; &amp; coId &amp; &quot;'&quot;) &amp; If(oc = &quot;MIXED&quot;, &quot;&quot;, &quot; AND Outcome = '&quot; &amp; oc &amp; &quot;'&quot;)]" />
+            <Assign x:TypeArguments="x:Int64" DisplayName="Task id" sap2010:WorkflowViewState.IdRef="Assign`1_9" To="[taskId]" Value="[Long.Parse(trow(&quot;TaskId&quot;).ToString)]" />
+            <upat:GetTaskData TimeoutMs="{x:Null}" DisplayName="Get the form outcome from Action Center" sap2010:WorkflowViewState.IdRef="GetTaskData_1" TaskId="[taskId]" TaskOutput="[taskInfo]" />
+            <Assign x:TypeArguments="x:String" DisplayName="Task status" sap2010:WorkflowViewState.IdRef="Assign`1_10" To="[status]" Value="[taskInfo.Status.ToString]" />
+            <Assign x:TypeArguments="x:String" DisplayName="Button the reviewer pressed" sap2010:WorkflowViewState.IdRef="Assign`1_11" To="[action]" Value="[If(taskInfo.Action Is Nothing, &quot;&quot;, taskInfo.Action.ToString)]" />
+            <Assign x:TypeArguments="x:String" DisplayName="When it changed" sap2010:WorkflowViewState.IdRef="Assign`1_12" To="[completedAt]" Value="[Convert.ToString(taskInfo.LastModificationTime, System.Globalization.CultureInfo.InvariantCulture)]" />
+            <Assign x:TypeArguments="x:String" DisplayName="Reviewer comment typed on the form" sap2010:WorkflowViewState.IdRef="Assign`1_13" To="[comment]" Value="[System.Text.RegularExpressions.Regex.Match(Newtonsoft.Json.JsonConvert.SerializeObject(taskInfo.Data), &quot;&quot;&quot;Comment&quot;&quot;\s*:\s*&quot;&quot;((?:[^&quot;&quot;\\]|\\.)*)&quot;&quot;&quot;, System.Text.RegularExpressions.RegexOptions.IgnoreCase).Groups(1).Value]" />
+            <Assign x:TypeArguments="x:String" DisplayName="Reviewer" sap2010:WorkflowViewState.IdRef="Assign`1_14" To="[reviewer]" Value="[If(taskInfo.AssignedToUser Is Nothing, &quot;Action Center reviewer&quot;, taskInfo.AssignedToUser.EmailAddress)]" />
+            <If Condition="[status = &quot;Completed&quot;]" DisplayName="If the reviewer has completed the form" sap2010:WorkflowViewState.IdRef="If_2">
+              <If.Then>
+                <Sequence DisplayName="Then" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                  <ui:ForEach x:TypeArguments="sd:DataRow" CurrentIndex="{x:Null}" DisplayName="Record sign-off on each finding this form covers" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[dtFindings.Select(flt)]">
+                    <ui:ForEach.Body>
+                      <ActivityAction x:TypeArguments="sd:DataRow">
+                        <ActivityAction.Argument>
+                          <DelegateInArgument x:TypeArguments="sd:DataRow" Name="f" />
+                        </ActivityAction.Argument>
+                        <Sequence DisplayName="Body" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                          <Assign x:TypeArguments="x:Object" DisplayName="Reviewer" sap2010:WorkflowViewState.IdRef="Assign`1_15" To="[f(&quot;Reviewer&quot;)]" Value="[reviewer]" />
+                          <Assign x:TypeArguments="x:Object" DisplayName="Sign-off time and action" sap2010:WorkflowViewState.IdRef="Assign`1_16" To="[f(&quot;ReviewerSignOff&quot;)]" Value="[completedAt &amp; &quot; &quot; &amp; action]" />
+                          <Assign x:TypeArguments="x:Object" DisplayName="Reviewer comment" sap2010:WorkflowViewState.IdRef="Assign`1_17" To="[f(&quot;ReviewerComment&quot;)]" Value="[comment]" />
+                          <Assign x:TypeArguments="x:Object" DisplayName="Status" sap2010:WorkflowViewState.IdRef="Assign`1_18" To="[f(&quot;Status&quot;)]" Value="[If(action.StartsWith(&quot;Reject&quot;), &quot;Rejected - needs rework&quot;, &quot;Reviewed - &quot; &amp; If(action = &quot;&quot;, &quot;Completed&quot;, action))]" />
+                        </Sequence>
+                      </ActivityAction>
+                    </ui:ForEach.Body>
+                  </ui:ForEach>
+                  <Assign x:TypeArguments="x:Int32" DisplayName="Count approved forms" sap2010:WorkflowViewState.IdRef="Assign`1_19" To="[out_Reviewed]" Value="[out_Reviewed + If(action.StartsWith(&quot;Reject&quot;), 0, 1)]" />
+                  <Assign x:TypeArguments="x:Int32" DisplayName="Count rejected forms" sap2010:WorkflowViewState.IdRef="Assign`1_20" To="[out_Rejected]" Value="[out_Rejected + If(action.StartsWith(&quot;Reject&quot;), 1, 0)]" />
+                </Sequence>
+              </If.Then>
+              <If.Else>
+                <Sequence DisplayName="Else" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                  <Assign x:TypeArguments="x:Int32" DisplayName="Count pending forms" sap2010:WorkflowViewState.IdRef="Assign`1_21" To="[out_Pending]" Value="[out_Pending + 1]" />
+                </Sequence>
+              </If.Else>
+            </If>
+            <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[New Object() {coId, oc, taskId.ToString, status, action, reviewer, completedAt, comment}]" DataTable="[dtOutcomes]" DisplayName="Record the outcome" sap2010:WorkflowViewState.IdRef="AddDataRow_1" />
+            <ui:LogMessage DisplayName="Log outcome" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[coId &amp; &quot; / &quot; &amp; oc &amp; &quot;: form &quot; &amp; taskId &amp; &quot; is &quot; &amp; status &amp; If(action = &quot;&quot;, &quot;&quot;, &quot; (&quot; &amp; action &amp; &quot;)&quot;)]" />
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEach.Body>
+    </ui:ForEach>
+    <ucas:DownloadStorageFile TimeoutMS="{x:Null}" Destination="[tmpDir &amp; &quot;/1_audit_plan.csv&quot;]" DisplayName="Download the audit plan from the bucket" sap2010:WorkflowViewState.IdRef="DownloadStorageFile_3" Path="[runFolder &amp; &quot;/1_audit_plan.csv&quot;]" StorageBucketName="EthicalAudit-WorkingPapers" />
+    <ucas:DownloadStorageFile TimeoutMS="{x:Null}" Destination="[tmpDir &amp; &quot;/4_audit_report.csv&quot;]" DisplayName="Download the original audit report from the bucket" sap2010:WorkflowViewState.IdRef="DownloadStorageFile_4" Path="[runFolder &amp; &quot;/4_audit_report.csv&quot;]" StorageBucketName="EthicalAudit-WorkingPapers" />
+    <ui:ReadCsvFile PathResource="{x:Null}" DataTable="[dtPlan]" Delimitator="Comma" DelimitatorForViewModel="Comma" DisplayName="Read the audit plan" FilePath="[tmpDir &amp; &quot;/1_audit_plan.csv&quot;]" sap2010:WorkflowViewState.IdRef="ReadCsvFile_3" />
+    <ui:ReadCsvFile PathResource="{x:Null}" DataTable="[dtReportBefore]" Delimitator="Comma" DelimitatorForViewModel="Comma" DisplayName="Read the original audit report" FilePath="[tmpDir &amp; &quot;/4_audit_report.csv&quot;]" sap2010:WorkflowViewState.IdRef="ReadCsvFile_4" />
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Script block: recalculate the audit summary after review" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="BuildPostReviewReport.cs">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="sd:DataTable" x:Key="findings">[dtFindings]</InArgument>
+        <InArgument x:TypeArguments="sd:DataTable" x:Key="planning">[dtPlan]</InArgument>
+        <InArgument x:TypeArguments="sd:DataTable" x:Key="originalReport">[dtReportBefore]</InArgument>
+        <OutArgument x:TypeArguments="sd:DataTable" x:Key="report">[dtAfter]</OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="conclusion">[out_AfterReview]</OutArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:AppendWriteCsvFile PathResource="{x:Null}" AddHeaders="True" CsvAction="Write" DataTable="[dtAfter]" Delimitator="Comma" DelimitatorForViewModel="Comma" DisplayName="Write the after-review audit summary" FilePath="[tmpDir &amp; &quot;/8_audit_report_after_review.csv&quot;]" sap2010:WorkflowViewState.IdRef="AppendWriteCsvFile_1" ShouldQuote="True" />
+    <ucas:DownloadStorageFile TimeoutMS="{x:Null}" Destination="[tmpDir &amp; &quot;/5_audit_trail_hash_chain.csv&quot;]" DisplayName="Download the audit trail from the bucket" sap2010:WorkflowViewState.IdRef="DownloadStorageFile_5" Path="[runFolder &amp; &quot;/5_audit_trail_hash_chain.csv&quot;]" StorageBucketName="EthicalAudit-WorkingPapers" />
+    <ui:ReadCsvFile PathResource="{x:Null}" DataTable="[dtChain]" Delimitator="Comma" DelimitatorForViewModel="Comma" DisplayName="Read the audit trail" FilePath="[tmpDir &amp; &quot;/5_audit_trail_hash_chain.csv&quot;]" sap2010:WorkflowViewState.IdRef="ReadCsvFile_5" />
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Script block: write the audit completion summary" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="BuildCompletionSummary.cs">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="runFolder">[runFolder]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="outputPath">[tmpDir &amp; "/9_audit_completion_summary.html"]</InArgument>
+        <InArgument x:TypeArguments="sd:DataTable" x:Key="findings">[dtFindings]</InArgument>
+        <InArgument x:TypeArguments="sd:DataTable" x:Key="planning">[dtPlan]</InArgument>
+        <InArgument x:TypeArguments="sd:DataTable" x:Key="reportBefore">[dtReportBefore]</InArgument>
+        <InArgument x:TypeArguments="sd:DataTable" x:Key="reportAfter">[dtAfter]</InArgument>
+        <InArgument x:TypeArguments="sd:DataTable" x:Key="outcomes">[dtOutcomes]</InArgument>
+        <InArgument x:TypeArguments="sd:DataTable" x:Key="chain">[dtChain]</InArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="status">[out_Completion]</OutArgument>
+        <OutArgument x:TypeArguments="x:Boolean" x:Key="chainOk">[chainVerified]</OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="orgHash">[orgHash]</OutArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:AppendWriteCsvFile PathResource="{x:Null}" AddHeaders="True" CsvAction="Write" DataTable="[dtFindings]" Delimitator="Comma" DelimitatorForViewModel="Comma" DisplayName="Write the signed-off findings register" FilePath="[tmpDir &amp; &quot;/3_findings_register_signed.csv&quot;]" sap2010:WorkflowViewState.IdRef="AppendWriteCsvFile_2" ShouldQuote="True" />
+    <ui:AppendWriteCsvFile PathResource="{x:Null}" AddHeaders="True" CsvAction="Write" DataTable="[dtOutcomes]" Delimitator="Comma" DelimitatorForViewModel="Comma" DisplayName="Write the review outcomes" FilePath="[tmpDir &amp; &quot;/7_review_outcomes.csv&quot;]" sap2010:WorkflowViewState.IdRef="AppendWriteCsvFile_3" ShouldQuote="True" />
+    <ucas:UploadStorageFile FileResource="{x:Null}" TimeoutMS="{x:Null}" Destination="[runFolder &amp; &quot;/&quot;]" DisplayName="Upload the signed-off register" sap2010:WorkflowViewState.IdRef="UploadStorageFile_1" Path="[tmpDir &amp; &quot;/3_findings_register_signed.csv&quot;]" StorageBucketName="EthicalAudit-WorkingPapers" />
+    <ucas:UploadStorageFile FileResource="{x:Null}" TimeoutMS="{x:Null}" Destination="[runFolder &amp; &quot;/&quot;]" DisplayName="Upload the review outcomes" sap2010:WorkflowViewState.IdRef="UploadStorageFile_2" Path="[tmpDir &amp; &quot;/7_review_outcomes.csv&quot;]" StorageBucketName="EthicalAudit-WorkingPapers" />
+    <ucas:UploadStorageFile FileResource="{x:Null}" TimeoutMS="{x:Null}" Destination="[runFolder &amp; &quot;/&quot;]" DisplayName="Upload the after-review audit summary" sap2010:WorkflowViewState.IdRef="UploadStorageFile_3" Path="[tmpDir &amp; &quot;/8_audit_report_after_review.csv&quot;]" StorageBucketName="EthicalAudit-WorkingPapers" />
+    <ucas:UploadStorageFile FileResource="{x:Null}" TimeoutMS="{x:Null}" Destination="[runFolder &amp; &quot;/&quot;]" DisplayName="Upload the audit completion summary" sap2010:WorkflowViewState.IdRef="UploadStorageFile_4" Path="[tmpDir &amp; &quot;/9_audit_completion_summary.html&quot;]" StorageBucketName="EthicalAudit-WorkingPapers" />
+    <Assign x:TypeArguments="x:String" DisplayName="Build summary" sap2010:WorkflowViewState.IdRef="Assign`1_22" To="[out_Summary]" Value="[&quot;Run &quot; &amp; runFolder &amp; &quot;: forms approved=&quot; &amp; out_Reviewed &amp; &quot;, pending=&quot; &amp; out_Pending &amp; &quot;, rejected=&quot; &amp; out_Rejected &amp; &quot;, conclusion after review: &quot; &amp; out_AfterReview &amp; &quot;. Completion: &quot; &amp; out_Completion &amp; &quot;. Files uploaded to bucket EthicalAudit-WorkingPapers&quot;]" />
+    <ui:LogMessage DisplayName="Log summary" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[out_Summary]" />
+  </Sequence>
+</Activity>

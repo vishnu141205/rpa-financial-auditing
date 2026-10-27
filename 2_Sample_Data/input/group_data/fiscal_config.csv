@@ -1,0 +1,5 @@
+CompanyId,FiscalYearEnd,CutOffDays,CreditWindowDays,CreditThreshold
+CMP-US,2026-06-30,5,15,8000
+CMP-UK,2026-03-31,5,15,6500
+CMP-DE,2026-09-30,5,15,7500
+CMP-IN,2026-03-31,5,15,400000

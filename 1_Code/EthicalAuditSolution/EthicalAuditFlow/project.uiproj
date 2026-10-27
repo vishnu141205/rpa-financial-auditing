@@ -1,0 +1,6 @@
+{
+  "Name": "EthicalAuditFlow",
+  "ProjectType": "Process",
+  "Description": "Visual (block) workflow: privacy-by-design multi-company reconciliation",
+  "MainFile": "Main.xaml"
+}

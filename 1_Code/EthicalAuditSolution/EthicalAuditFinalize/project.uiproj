@@ -1,0 +1,6 @@
+{
+  "Name": "EthicalAuditFinalize",
+  "ProjectType": "Process",
+  "Description": "Finalize the review: read Action Center outcomes, sign off the findings register",
+  "MainFile": "Main.xaml"
+}

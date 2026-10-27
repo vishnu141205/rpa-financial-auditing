@@ -1,0 +1,6 @@
+﻿Scope,InherentRisk,Findings,Approved,Rejected,StillOpen,FactualBeforeUSD,UnresolvedBeforeUSD,OutstandingFactualUSD,OutstandingUnresolvedUSD,OverallMaterialityUSD,PerformanceMaterialityUSD,ConclusionBefore,ConclusionAfterReview
+CMP-US,Medium,33,33,0,0,11610.87,77585.74,0.00,0.00,32548.03,21156.22,Further audit procedures required before a conclusion,All exceptions reviewed and approved - no outstanding exceptions
+CMP-UK,Medium,33,20,13,0,12535.67,128588.31,0.00,98953.44,37396.03,24307.42,Further audit procedures required before a conclusion,Further audit procedures required before a conclusion
+CMP-DE,Low,29,16,13,0,11015.57,74084.37,10419.08,4461.38,34701.52,26026.14,Further audit procedures required before a conclusion,Outstanding exceptions below performance materiality - resolve and document
+CMP-IN,High,29,15,14,0,6410.20,92517.20,5716.43,41430.60,32079.48,16039.74,Further audit procedures required before a conclusion,Further audit procedures required before a conclusion
+GROUP,,124,84,40,0,41572.31,372775.62,16135.51,144845.42,136725.06,87529.52,Further audit procedures required before a conclusion,Further audit procedures required before a conclusion

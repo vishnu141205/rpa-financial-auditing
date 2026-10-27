@@ -1,0 +1,6 @@
+﻿Scope,InherentRisk,ItemsTested,CoveragePct,Committed,Exceptions,Critical,High,Medium,Low,FactualMisstatementUSD,UnresolvedExposureUSD,OverallMaterialityUSD,PerformanceMaterialityUSD,PreliminaryConclusion
+CMP-US,Medium,130,100,98,73,0,7,38,28,11610.87,309454.91,32548.03,21156.22,Further audit procedures required before a conclusion
+CMP-UK,Medium,127,100,96,73,0,7,49,17,12535.67,397641.89,37396.03,24307.42,Further audit procedures required before a conclusion
+CMP-DE,Low,121,100,94,69,0,7,40,22,11015.57,389305.35,34701.52,26026.14,Further audit procedures required before a conclusion
+CMP-IN,High,122,100,94,69,0,10,35,24,6410.2,244303.22,32079.48,16039.74,Further audit procedures required before a conclusion
+GROUP,,500,100,382,284,0,31,162,91,41572.31,1340705.37,136725.06,87529.52,Further audit procedures required before a conclusion

@@ -1,0 +1,117 @@
+{
+  "name": "EthicalAuditFlow",
+  "projectId": "136704cc-7e2c-4dff-929f-27b7e25ffbc7",
+  "description": "Visual (block) workflow: privacy-by-design multi-company reconciliation",
+  "main": "Main.xaml",
+  "dependencies": {
+    "UiPath.System.Activities": "[26.8.2]",
+    "UiPath.Excel.Activities": "3.6.1",
+    "UiPath.Persistence.Activities": "1.13.0",
+    "PdfPig": "0.1.16",
+    "UiPath.FormActivityLibrary": "2.0.8"
+  },
+  "webServices": [],
+  "entitiesStores": [],
+  "schemaVersion": "4.1",
+  "studioVersion": "26.0.203.0",
+  "projectVersion": "1.0.0",
+  "runtimeOptions": {
+    "autoDispose": false,
+    "netFrameworkLazyLoading": false,
+    "isPausable": false,
+    "isAttended": false,
+    "requiresUserInteraction": false,
+    "supportsPersistence": false,
+    "workflowSerialization": "NewtonsoftJson",
+    "excludedLoggedData": [
+      "Private:*",
+      "*password*"
+    ],
+    "executionType": "Workflow",
+    "readyForPiP": false,
+    "startsInPiP": false,
+    "mustRestoreAllDependencies": true,
+    "pipType": "ChildSession"
+  },
+  "designOptions": {
+    "projectProfile": "Developement",
+    "outputType": "Process",
+    "libraryOptions": {
+      "privateWorkflows": []
+    },
+    "processOptions": {
+      "ignoredFiles": []
+    },
+    "fileInfoCollection": [],
+    "saveToCloud": false
+  },
+  "expressionLanguage": "VisualBasic",
+  "entryPoints": [
+    {
+      "filePath": "Main.xaml",
+      "uniqueId": "71d96e46-b3f4-4534-b534-82bb21b9740a",
+      "input": [
+        {
+          "name": "in_DataFolder",
+          "type": "System.String",
+          "required": false
+        },
+        {
+          "name": "in_Mode",
+          "type": "System.String",
+          "required": false
+        }
+      ],
+      "output": [
+        {
+          "name": "out_Summary",
+          "type": "System.String"
+        },
+        {
+          "name": "out_Committed",
+          "type": "System.Int32"
+        },
+        {
+          "name": "out_Routed",
+          "type": "System.Int32"
+        },
+        {
+          "name": "out_FalseCommits",
+          "type": "System.Int32"
+        },
+        {
+          "name": "out_LeakHits",
+          "type": "System.Int32"
+        },
+        {
+          "name": "out_ChainOk",
+          "type": "System.Boolean"
+        },
+        {
+          "name": "out_AccuracyPct",
+          "type": "System.Double"
+        },
+        {
+          "name": "out_Conclusion",
+          "type": "System.String"
+        },
+        {
+          "name": "out_PapersStored",
+          "type": "System.Boolean"
+        },
+        {
+          "name": "out_RunFolder",
+          "type": "System.String"
+        },
+        {
+          "name": "out_TasksCreated",
+          "type": "System.Int32"
+        }
+      ]
+    }
+  ],
+  "isTemplate": false,
+  "templateProjectData": {},
+  "publishData": {},
+  "targetFramework": "Portable"
+}

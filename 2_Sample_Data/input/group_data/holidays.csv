@@ -1,0 +1,27 @@
+CompanyId,Date,Name
+CMP-US,2026-01-01,New Year's Day
+CMP-US,2026-01-19,Martin Luther King Jr. Day
+CMP-US,2026-05-25,Memorial Day
+CMP-US,2026-09-07,Labor Day
+CMP-US,2026-11-26,Thanksgiving
+CMP-US,2026-12-25,Christmas Day
+CMP-UK,2026-01-01,New Year's Day
+CMP-UK,2026-04-03,Good Friday
+CMP-UK,2026-04-06,Easter Monday
+CMP-UK,2026-05-04,Early May bank holiday
+CMP-UK,2026-05-25,Spring bank holiday
+CMP-UK,2026-08-31,Summer bank holiday
+CMP-UK,2026-12-25,Christmas Day
+CMP-DE,2026-01-01,New Year's Day
+CMP-DE,2026-04-03,Good Friday
+CMP-DE,2026-04-06,Easter Monday
+CMP-DE,2026-05-01,Labour Day
+CMP-DE,2026-05-14,Ascension Day
+CMP-DE,2026-05-25,Whit Monday
+CMP-DE,2026-12-25,Christmas Day
+CMP-DE,2026-12-26,Second Christmas Day
+CMP-IN,2026-01-26,Republic Day
+CMP-IN,2026-03-04,Holi
+CMP-IN,2026-10-02,Gandhi Jayanti
+CMP-IN,2026-11-09,Diwali
+CMP-IN,2026-12-25,Christmas Day

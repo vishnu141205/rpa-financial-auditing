@@ -1,0 +1,45 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "EthicalAuditFlow",
+    "kind": "process",
+    "type": "process",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "projectKey": "d68f104e-800b-4d0b-a5e5-2fac160fb56e",
+    "isOverridable": true,
+    "dependencies": [
+      {
+        "name": "EthicalAuditFlow",
+        "kind": "package"
+      }
+    ],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "type": "Process",
+      "name": "EthicalAuditFlow",
+      "package": {
+        "key": "d4393f66-8094-4a96-92b0-729a44fd5c07"
+      },
+      "packageName": "EthicalAuditSolution.process.EthicalAuditFlow",
+      "jobPriority": "Medium",
+      "jobRecording": "Disabled",
+      "targetFrameworkValue": "Portable",
+      "duration": 40,
+      "frequency": 500,
+      "quality": 100,
+      "remoteControlAccess": "None",
+      "retentionAction": "Delete",
+      "retentionPeriod": 30,
+      "staleRetentionAction": "Delete",
+      "staleRetentionPeriod": 180
+    },
+    "locks": [],
+    "key": "2db1eb52-980d-4496-8c29-91300af966e8"
+  }
+}

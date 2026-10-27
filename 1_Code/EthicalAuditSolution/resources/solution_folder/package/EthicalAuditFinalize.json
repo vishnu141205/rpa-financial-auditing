@@ -1,0 +1,23 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "EthicalAuditFinalize",
+    "kind": "package",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "projectKey": "8ed40375-2494-4e36-95a1-e6209b2453c8",
+    "isOverridable": true,
+    "dependencies": [],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "name": "EthicalAuditFinalize"
+    },
+    "locks": [],
+    "key": "a23cfcb2-cb61-4a2f-93be-4c27f9d993c8"
+  }
+}

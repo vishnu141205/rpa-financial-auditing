@@ -1,0 +1,47 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Stage1_LoadData" mva:VisualBasic.Settings="{x:Null}"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:csv="clr-namespace:UiPath.CSV.Activities;assembly=UiPath.Excel.Activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:sc="clr-namespace:System.Collections;assembly=System.Private.CoreLib"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common"
+ xmlns:upae="clr-namespace:UiPath.Persistence.Activities.ExternalTask;assembly=UiPath.Persistence.Activities"
+ xmlns:upaf="clr-namespace:UiPath.Persistence.Activities.FormTask;assembly=UiPath.Persistence.Activities"
+ xmlns:upat="clr-namespace:UiPath.Persistence.Activities.Tasks;assembly=UiPath.Persistence.Activities"
+ xmlns:upmt="clr-namespace:UiPath.Persistence.Activities.Model.Task;assembly=UiPath.Persistence.Activities"
+ xmlns:ucas="clr-namespace:UiPath.Core.Activities.Storage;assembly=UiPath.System.Activities"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:uic="clr-namespace:UiPath.Core.Activities;assembly=UiPath.System.Activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+ <x:Members><x:Property Name="in_DataFolder" Type="InArgument(x:String)" /><x:Property Name="out_Companies" Type="OutArgument(sd:DataTable)" /><x:Property Name="out_Ledger" Type="OutArgument(sd:DataTable)" /><x:Property Name="out_Documents" Type="OutArgument(sd:DataTable)" /><x:Property Name="out_Truth" Type="OutArgument(sd:DataTable)" /><x:Property Name="out_VendorMaster" Type="OutArgument(sd:DataTable)" /></x:Members>
+ <TextExpression.NamespacesForImplementation>
+  <sco:Collection x:TypeArguments="x:String">
+   <x:String>System.Activities</x:String><x:String>System.Activities.Statements</x:String>
+   <x:String>System.Activities.Expressions</x:String><x:String>Microsoft.VisualBasic</x:String>
+   <x:String>Microsoft.VisualBasic.Activities</x:String><x:String>System</x:String>
+   <x:String>System.Collections</x:String><x:String>System.Collections.Generic</x:String>
+   <x:String>System.Data</x:String><x:String>System.IO</x:String><x:String>System.Linq</x:String>
+   <x:String>System.Text.RegularExpressions</x:String><x:String>UiPath.Core</x:String>
+   <x:String>UiPath.Core.Activities</x:String><x:String>UiPath.Persistence.Activities.ExternalTask</x:String><x:String>UiPath.Persistence.Activities.FormTask</x:String>
+  </sco:Collection>
+ </TextExpression.NamespacesForImplementation>
+ <TextExpression.ReferencesForImplementation>
+  <sco:Collection x:TypeArguments="AssemblyReference">
+   <AssemblyReference>System.Activities</AssemblyReference><AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+   <AssemblyReference>System.Private.CoreLib</AssemblyReference><AssemblyReference>mscorlib</AssemblyReference>
+   <AssemblyReference>System.Data</AssemblyReference><AssemblyReference>System.Data.Common</AssemblyReference>
+   <AssemblyReference>System</AssemblyReference><AssemblyReference>System.Linq</AssemblyReference>
+   <AssemblyReference>System.Core</AssemblyReference><AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+   <AssemblyReference>System.Text.RegularExpressions</AssemblyReference>
+   <AssemblyReference>System.Security.Cryptography</AssemblyReference>
+   <AssemblyReference>UiPath.System.Activities</AssemblyReference><AssemblyReference>UiPath.Excel.Activities</AssemblyReference><AssemblyReference>UiPath.Persistence.Activities</AssemblyReference>
+  </sco:Collection>
+ </TextExpression.ReferencesForImplementation>
+<Sequence DisplayName="Stage 1 - Load organization, ledger and extracted invoices"><csv:ReadCsvFile DisplayName="Read companies (organization hierarchy)" FilePath="[in_DataFolder &amp; &quot;/companies.csv&quot;]" IncludeColumnNames="True" DataTable="[out_Companies]" /><csv:ReadCsvFile DisplayName="Read ledger" FilePath="[in_DataFolder &amp; &quot;/ledger.csv&quot;]" IncludeColumnNames="True" DataTable="[out_Ledger]" /><csv:ReadCsvFile DisplayName="Read extracted invoices (Document Understanding output)" FilePath="[in_DataFolder &amp; &quot;/documents.csv&quot;]" IncludeColumnNames="True" DataTable="[out_Documents]" /><csv:ReadCsvFile DisplayName="Read ground truth (benchmark only)" FilePath="[in_DataFolder &amp; &quot;/ground_truth.csv&quot;]" IncludeColumnNames="True" DataTable="[out_Truth]" /><csv:ReadCsvFile DisplayName="Read the approved vendor master" FilePath="[in_DataFolder &amp; &quot;/vendor_master.csv&quot;]" IncludeColumnNames="True" DataTable="[out_VendorMaster]" /><ui:LogMessage Level="Info" DisplayName="Log load summary"><ui:LogMessage.Message><InArgument x:TypeArguments="x:Object"><VisualBasicValue x:TypeArguments="x:Object" ExpressionText="&quot;Loaded &quot; &amp; out_Companies.Rows.Count &amp; &quot; companies, &quot; &amp; out_Ledger.Rows.Count &amp; &quot; ledger rows, &quot; &amp; out_Documents.Rows.Count &amp; &quot; documents&quot;" /></InArgument></ui:LogMessage.Message></ui:LogMessage></Sequence>
+</Activity>

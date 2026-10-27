@@ -1,0 +1,41 @@
+CompanyId,VendorId,VendorName
+CMP-US,V-US-001,Northwind Supply
+CMP-US,V-US-002,Apex Freight
+CMP-US,V-US-003,BlueRidge Packaging
+CMP-US,V-US-004,Orion Components
+CMP-US,V-US-005,Helix Office
+CMP-US,V-US-006,Summit Cloud Services
+CMP-US,V-US-007,Kestrel Utilities
+CMP-US,V-US-008,Vantage Print
+CMP-US,V-US-009,Pioneer Tooling
+CMP-US,V-US-010,Lumen Energy
+CMP-UK,V-UK-001,Northwind Supply
+CMP-UK,V-UK-002,Apex Freight
+CMP-UK,V-UK-003,BlueRidge Packaging
+CMP-UK,V-UK-004,Orion Components
+CMP-UK,V-UK-005,Helix Office
+CMP-UK,V-UK-006,Summit Cloud Services
+CMP-UK,V-UK-007,Kestrel Utilities
+CMP-UK,V-UK-008,Vantage Print
+CMP-UK,V-UK-009,Pioneer Tooling
+CMP-UK,V-UK-010,Lumen Energy
+CMP-DE,V-DE-001,Northwind Supply
+CMP-DE,V-DE-002,Apex Freight
+CMP-DE,V-DE-003,BlueRidge Packaging
+CMP-DE,V-DE-004,Orion Components
+CMP-DE,V-DE-005,Helix Office
+CMP-DE,V-DE-006,Summit Cloud Services
+CMP-DE,V-DE-007,Kestrel Utilities
+CMP-DE,V-DE-008,Vantage Print
+CMP-DE,V-DE-009,Pioneer Tooling
+CMP-DE,V-DE-010,Lumen Energy
+CMP-IN,V-IN-001,Northwind Supply
+CMP-IN,V-IN-002,Apex Freight
+CMP-IN,V-IN-003,BlueRidge Packaging
+CMP-IN,V-IN-004,Orion Components
+CMP-IN,V-IN-005,Helix Office
+CMP-IN,V-IN-006,Summit Cloud Services
+CMP-IN,V-IN-007,Kestrel Utilities
+CMP-IN,V-IN-008,Vantage Print
+CMP-IN,V-IN-009,Pioneer Tooling
+CMP-IN,V-IN-010,Lumen Energy

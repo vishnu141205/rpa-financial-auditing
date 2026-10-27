@@ -1,0 +1,24 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "EthicalAudit-WorkingPapers",
+    "kind": "bucket",
+    "type": "orchestratorBucket",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "isOverridable": true,
+    "dependencies": [],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "name": "EthicalAudit-WorkingPapers",
+      "type": "Orchestrator"
+    },
+    "locks": [],
+    "key": "7640646d-81e1-4cb6-945b-e3c0867374e6"
+  }
+}

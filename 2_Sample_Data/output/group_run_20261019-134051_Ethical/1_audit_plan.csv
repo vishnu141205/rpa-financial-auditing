@@ -1,0 +1,5 @@
+﻿OrgId,CompanyId,Currency,InherentRisk,LedgerItems,PopulationValueUSD,OverallMateriality,PerformanceMateriality,ClearlyTrivial,MaterialityBasis,Approach
+ORG-001,CMP-US,USD,Medium,130,650960.56,32548.03,21156.22,1627.4,5% of tested disbursements (USD); PM 65% of overall for Medium risk,100% population testing (automated); exceptions to human reviewer
+ORG-001,CMP-UK,GBP,Medium,127,747920.65,37396.03,24307.42,1869.8,5% of tested disbursements (USD); PM 65% of overall for Medium risk,100% population testing (automated); exceptions to human reviewer
+ORG-001,CMP-DE,EUR,Low,121,694030.32,34701.52,26026.14,1735.08,5% of tested disbursements (USD); PM 75% of overall for Low risk,100% population testing (automated); exceptions to human reviewer
+ORG-001,CMP-IN,INR,High,122,641589.65,32079.48,16039.74,1603.97,5% of tested disbursements (USD); PM 50% of overall for High risk,100% population testing (automated); exceptions to human reviewer

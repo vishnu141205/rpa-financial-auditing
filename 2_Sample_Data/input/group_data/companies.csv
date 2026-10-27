@@ -1,0 +1,5 @@
+OrgId,CompanyId,Name,Currency,FxToGroup,TolerancePct,MinConfidence,IcTolerancePct,InherentRisk,MaterialityPct
+ORG-001,CMP-US,Meridian Logistics Inc.,USD,1.0,1.0,0.85,0.5,Medium,5.0
+ORG-001,CMP-UK,Meridian Retail Ltd.,GBP,1.27,1.0,0.85,0.5,Medium,5.0
+ORG-001,CMP-DE,Meridian Manufacturing GmbH,EUR,1.09,0.5,0.9,0.5,Low,5.0
+ORG-001,CMP-IN,Meridian Services Pvt. Ltd.,INR,0.012,1.0,0.85,0.5,High,5.0
