@@ -10,6 +10,7 @@ Action Center. It handles a group of companies under one organization (four subs
 README.md                         this file
 1_Code/                           the source files
 2_Sample_Data/                    sample input and output files
+docs/                             Ethical_RPA_Screenshots.docx: screenshots of the workflow, review forms and results
 ```
 
 ### 1_Code: the source
